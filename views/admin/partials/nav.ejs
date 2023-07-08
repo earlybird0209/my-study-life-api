@@ -1,0 +1,18 @@
+<nav class="navbar navbar-dark bg-primary navbar-expand">
+    <div class="container-fluid"><a class="navbar-brand" href="/">
+      <img src="/logo.png" alt="" style="width: 190px;">
+    </a>
+      
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item <%- title === 'Admin Dashboard' ? 'active' : '' %>"><a class="nav-link" href="/"><span>Dashboard</span></a></li>
+        <li class="nav-item <%- title != 'Admin Dashboard' ? 'active' : '' %>"><a class="nav-link" href="/users"><span>User Management</span></a></li>
+      </ul>
+      
+      <% if(authUserObject) { %>
+        <span class="navbar-text"><a class="nav-link" href="/logout"><span> Logout</span></a></span>
+      <% } else { %>
+        <span class="navbar-text"><a class="nav-link" href="/login"><span> Login</span></a></span>
+      <% } %>
+
+    </div>
+</nav>

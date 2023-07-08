@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="178.128.173.138" id="12f0faa6-495f-430e-8945-6bd06b9be1ec" port="22" customName="mystudylife-dev" nameFormat="CUSTOM" username="root" useOpenSSHConfig="true">
+        <option name="customName" value="mystudylife-dev" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

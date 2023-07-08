@@ -1,0 +1,109 @@
+<% title = "Admin Dashboard" %>
+<%- include('../partials/head'); %>
+<%- include('../partials/nav'); %>
+
+<div class="container-fluid mt-2">
+  <!-- <header>
+    <h2>Dashboard</h2>
+  </header> -->
+
+  <div class="row">
+
+    <section class="col-md-3">
+      <div class="dash-box" style="height: 128px;">
+        <h5>User Search</h5>
+
+        <form action="/users" method="GET">
+          <div class="input-group mb-3">
+              <input type="text" class="form-control" name="search" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button id="jsSearch" class="btn btn-outline-secondary" type="button">Search</button>
+              </div>
+          </div>
+        </form>
+
+      </div>
+    </section>
+
+    <section class="col-md-3">
+      <div class="dash-box">
+        <h5>Logins</h5>
+        <small>last 7 days</small>
+        <h3><%= lastLoginAtCount %></h3>
+      </div>
+    </section>
+
+    <section class="col-md-3">
+      <div class="dash-box">
+        <h5>Active Users</h5>
+        <small>last 7 days</small>
+        <h3><%= lastActiveAtCount %></h3>
+      </div>
+    </section>
+
+    <section class="col-md-3">
+      <div class="dash-box">
+        <h5>New Signups</h5>
+        <small>last 7 days</small>
+        <h3><%= newUsersCount %></h3>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="row">
+
+    <section class="col-md-3">
+      <div class="dash-box">
+        <h5>Total Teachers</h5>
+        <h3><%= teachersCount %></h3>
+      </div>
+    </section>
+
+    <section class="col-md-3">
+      <div class="dash-box">
+        <div class="row">
+        <!-- <b>Total Users</b>
+        <p><%= UsersCount %></p> -->
+        
+        <span class="col-sm-6">
+          <b>Total Students</b>
+          <p><%= studentsCount %></p>
+          <b>Total Classes</b>
+          <p><%= classesCount %></p>
+        </span>
+        
+        <span class="col-sm-6">
+          <b>Total Exams</b>
+          <p><%= examsCount %></p>
+          <b>Total Tasks</b>
+          <p><%= tasksCount %></p>
+        </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="col-md-3">
+      <div class="dash-box">
+        <h5>Partnership</h3>
+          <div style="margin-top:15px; border: 1px solid #aaa; width: 100%;">
+              <a href="/partnership-image/edit">
+                <img src="<%= partnership ? partnership.imageUrl : '' %>" alt="" style="width: 100%; min-width: 100%; min-height: 100px;">
+              </a>
+          </div>
+      </div>
+    </section>
+
+  </div>
+
+
+</div>
+
+
+<script>
+  jsSearch.addEventListener('click', function() {
+    jsSearch.form.submit();
+  });
+</script>
+
+<%- include('../partials/footer'); %>

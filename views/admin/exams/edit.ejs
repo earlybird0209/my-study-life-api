@@ -1,0 +1,97 @@
+<% title = "Exam" %>
+<%- include('../partials/head'); %>
+<%- include('../partials/nav'); %>
+
+<div class="container mt-2">
+    <div>
+        <h2>Exam Edit</h2>
+        <!-- edit class form -->
+        <form action="/class/<%= exam.id %>" method="POST">
+            
+            <div class="row">
+            
+                <div class="col-md-6">
+
+                <div class="form-group">
+                    <label for="userId">User</label>
+                    <input type="text" disabled class="form-control" id="userId" name="userId" value="<%= exam.userId %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" id="subject" name="subject" value="<%= exam.subject %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="resit">Resit</label>
+                    <input type="text" class="form-control" id="resit" name="resit" value="<%= exam.resit %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <input type="text" class="form-control" id="type" name="type" value="<%= exam.type %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="module">Module</label>
+                    <input type="text" class="form-control" id="module" name="module" value="<%= exam.module %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="mode">Mode</label>
+                    <input type="text" class="form-control" id="mode" name="mode" value="<%= exam.mode %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="onlineUrl">Online URL</label>
+                    <input type="text" class="form-control" id="onlineUrl" name="onlineUrl" value="<%= exam.onlineUrl %>">
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label for="room">Room</label>
+                    <input type="text" class="form-control" id="room" name="room" value="<%= exam.room %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="seat">Seat</label>
+                    <input type="text" class="form-control" id="seat" name="seat" value="<%= exam.seat %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="startDate">Start Date</label>
+                    <input type="text" class="form-control" id="startDate" name="startDate" value="<%= exam.startDate %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="startTime">Start Time</label>
+                    <input type="text" class="form-control" id="startTime" name="startTime" value="<%= exam.startTime %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="duration">Duration</label>
+                    <input type="text" class="form-control" id="duration" name="duration" value="<%= exam.duration %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="createdAt">Created At</label>
+                    <input type="text" disabled class="form-control" id="createdAt" name="createdAt" value="<%= exam.createdAt %>">
+                </div>
+
+                </div>
+            </div>
+        </div>
+
+            <button type="submit" class="btn btn-success">Update</button>
+
+        </form>
+
+
+    </div>
+</div>
+
+
+<%- include('../partials/footer'); %>

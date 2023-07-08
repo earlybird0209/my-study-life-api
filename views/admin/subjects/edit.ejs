@@ -1,0 +1,58 @@
+<% title = "Subject" %>
+<%- include('../partials/head'); %>
+<%- include('../partials/nav'); %>
+
+<div class="container mt-2">
+    <div>
+        <h2>Subject Edit</h2>
+        <!-- edit class form -->
+        <form action="/class/<%= subject.id %>" method="POST">
+            
+            <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label for="userId">User</label>
+                    <input type="text" disabled class="form-control" id="userId" name="userId" value="<%= subject.userId %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" id="subject" name="subject" value="<%= subject.subject %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <input type="color" style="height: 90px; width: 100px;" class="form-control" id="color" name="color" value="<%= subject.color %>">
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+               
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control" id="image" name="image" value="<%= subject.image %>">
+                    <img src="<%= subject.image %>" width="200" alt="">
+                </div>
+                
+                <div class="form-group">
+                    <label for="createdAt">Created At</label>
+                    <input type="text" disabled class="form-control" id="createdAt" name="createdAt" value="<%= subject.createdAt %>">
+                </div>
+
+                <button type="submit" class="btn btn-success float-right">Update</button>
+
+            </div>
+        </div>
+
+            
+
+        </form>
+
+
+    </div>
+</div>
+
+
+<%- include('../partials/footer'); %>

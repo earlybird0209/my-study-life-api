@@ -1,0 +1,118 @@
+<% title = "Class" %>
+<%- include('../partials/head'); %>
+<%- include('../partials/nav'); %>
+
+<div class="container mt-2">
+    <div>
+        <h2>Class Edit</h2>
+        <!-- edit class form -->
+        <form action="/class/<%= classObject.id %>" method="POST">
+            
+            <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label for="userId">User</label>
+                    <input type="text" disabled class="form-control" id="userId" name="userId" value="<%= classObject.userId %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" id="subject" name="subject" value="<%= classObject.subject %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="module">Module</label>
+                    <input type="text" class="form-control" id="module" name="module" value="<%= classObject.module %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="mode">Mode</label>
+                    <input type="text" class="form-control" id="mode" name="mode" value="<%= classObject.mode %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="room">Room</label>
+                    <input type="text" class="form-control" id="room" name="room" value="<%= classObject.room %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="building">Building</label>
+                    <input type="text" class="form-control" id="building" name="building" value="<%= classObject.building %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="onlineUrl">Online URL</label>
+                    <input type="text" class="form-control" id="onlineUrl" name="onlineUrl" value="<%= classObject.onlineUrl %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="teacher">Teacher</label>
+                    <input type="text" class="form-control" id="teacher" name="teacher" value="<%= classObject.teacher %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="teacherEmail">Teacher's Email</label>
+                    <input type="text" class="form-control" id="teacherEmail" name="teacherEmail" value="<%= classObject.teacherEmail %>">
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label for="days">Days</label>
+                    <select class="form-control" name="days" id="days" multiple value="<%= classObject.days %>" style="height: 170px;">
+                        <option value="monday" <%= classObject.days.includes('monday') ? 'selected' : '' %>>Monday</option>
+                        <option value="tuesday" <%= classObject.days.includes('tuesday') ? 'selected' : '' %>>Tuesday</option>
+                        <option value="wednesday" <%= classObject.days.includes('wednesday') ? 'selected' : '' %>>Wednesday</option>
+                        <option value="thursday" <%= classObject.days.includes('thursday') ? 'selected' : '' %>>Thursday</option>
+                        <option value="friday" <%= classObject.days.includes('friday') ? 'selected' : '' %>>Friday</option>
+                        <option value="saturday" <%= classObject.days.includes('saturday') ? 'selected' : '' %>>Saturday</option>
+                        <option value="sunday" <%= classObject.days.includes('sunday') ? 'selected' : '' %>>Sunday</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" class="form-control" id="startDate" name="startDate" value="<%= moment(classObject.startDate).format('YYYY-MM-DD') %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="endDate">End Date</label>
+                    <input type="date" class="form-control" id="endDate" name="endDate" value="<%= moment(classObject.endDate).format('YYYY-MM-DD') %>">
+                </div>
+                
+                <div class="form-group">
+                    <label for="startTime">Start Time</label>
+                    <input type="text" class="form-control" id="startTime" name="startTime" value="<%= moment(classObject.startTime).format('HH:mm') %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="endTime">End Time</label>
+                    <input type="text" class="form-control" id="endTime" name="endTime" value="<%= moment(classObject.endTime).format('HH:mm') %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="occurs">Occurs</label>
+                    <input type="text" class="form-control" id="occurs" name="occurs" value="<%= classObject.occurs %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="createdAt">Created At</label>
+                    <input type="text" disabled class="form-control" id="createdAt" name="createdAt" value="<%= classObject.createdAt %>">
+                </div>
+
+            </div>
+        </div>
+
+            <button type="submit" class="btn btn-success">Update</button>
+
+        </form>
+
+
+    </div>
+</div>
+
+
+<%- include('../partials/footer'); %>

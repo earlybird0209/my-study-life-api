@@ -1,0 +1,43 @@
+<% title = "Subject" %>
+<%- include('../partials/head'); %>
+<%- include('../partials/nav'); %>
+
+<div class="container mt-2">
+    <div>
+        <h2>Partnership Edit</h2>
+        <!-- edit class form -->
+        
+        </div>
+        
+        <form action="/partnership-image" method="POST" enctype="multipart/form-data">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">                        
+                        <label for="image">Image</label>
+                        <input type="file" name="file" class="form-control">
+                        <% if(partnership) { %>
+                            <img src="<%= partnership ? partnership.imageUrl : '' %>" alt="" style="width: 100%; min-height: 100px; margin-top: 15px;">
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">                        
+                        <label for="image">Title</label>
+                        <input type="text" name="title" placeholder="Title" class="form-control" value="<%= partnership ? partnership.title : '' %>">
+                    </div>
+                    <div class="form-group">                        
+                        <label for="image">Link</label>
+                        <input type="text" name="link" placeholder="Link" class="form-control" value="<%= partnership ? partnership.link : '' %>">
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-success float-right">Upload</button>
+        </form>
+
+    </div>
+</div>

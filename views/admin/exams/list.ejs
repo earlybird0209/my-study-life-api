@@ -1,0 +1,85 @@
+<% title = "Exams" %>
+<%- include('../partials/head'); %>
+<%- include('../partials/nav'); %>
+
+<div class="container-fluid">
+    <div class="table-wrapper">
+
+        <div>
+            <div class="menu">
+                <ul class="user-menu">
+                    <li class="nav-item"><a class="nav-link" href="/users/<%= userId %>"><span>User Edit</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/classes/user/<%= userId %>"><span>Classes</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/exams/user/<%= userId %>"><span>Exams</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/tasks/user/<%= userId %>"><span>Tasks</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/subjects/user/<%= userId %>"><span>Subjects</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/holidays/user/<%= userId %>"><span>Holidays</span></a></li>
+                    <li class="nav-item" style="float: right;"><a class="nav-link" href="/users"><span>< Back</span></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <%- include('../partials/pagination'); %>
+        <p>Total: <%= count %></p>
+        
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Subject</th>
+                    <th>Resit</th>
+                    <th>Type</th>
+                    <th>Module</th>
+                    <th>Mode</th>
+                    <th>Online URL</th>
+                    <th>Room</th>
+                    <th>Seat</th>
+                    <th>Start Date</th>
+                    <th>Start Time</th>
+                    <th>Duration</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (exams.length === 0) { %>
+                    <tr>
+                        <td colspan="15">No exams found.</td>
+                    </tr>
+                <% } %>
+
+                <% exams.forEach(function(exam) { %>
+                <tr>
+                    <td><%= exam.id %></td>
+                    
+                    <td><%= exam.userId %></td>
+                    <td><%= exam.subject ? exam.subject.subject : '' %></td>
+                    <td><%= exam.resit %></td>
+                    <td><%= exam.type %></td>
+                    <td><%= exam.module %></td>
+                    <td><%= exam.mode %></td>
+                    <td><%= exam.onlineUrl %></td>
+                    <td><%= exam.room %></td>
+                    <td><%= exam.seat %></td>
+                    <td><%= moment(exam.startDate).format('DD/MM/YYYY') %></td>
+                    <td><%= exam.startTime %></td>
+                    <td><%= exam.duration %></td>
+                    <td><%= moment(exam.createdAt).format('DD/MM/YYYY HH:mm:ss') %></td>
+                    
+                    <td>
+                        <a href="/Exams/<%= exam.id %>" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="/Exams/<%= exam.id %>" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <%- include('../partials/pagination'); %>
+
+    </div>
+</div>
+
+
+<%- include('../partials/footer'); %>

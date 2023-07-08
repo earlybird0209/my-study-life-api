@@ -1,0 +1,92 @@
+<% title = "Task" %>
+<%- include('../partials/head'); %>
+<%- include('../partials/nav'); %>
+
+<div class="container mt-2">
+    <div>
+        <h2>Task Edit</h2>
+        <!-- edit class form -->
+        <form action="/class/<%= task.id %>" method="POST">
+            
+            <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label for="userId">User</label>
+                    <input type="text" disabled class="form-control" id="userId" name="userId" value="<%= task.userId %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" id="subject" name="subject" value="<%= task.subject %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="details">Details</label>
+                    <input type="text" class="form-control" id="details" name="details" value="<%= task.details %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <input type="text" class="form-control" id="type" name="type" value="<%= task.type %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-control" name="category" id="category" value="<%= task.category %>">
+                        <option value="reminder" <%= task.category == 'reminder' ? 'selected' : '' %>>reminder</option>
+                        <option value="revision" <%= task.category == 'revision' ? 'selected' : '' %>>revision</option>
+                        <option value="essay" <%= task.category == 'essay' ? 'selected' : '' %>>essay</option>
+                        <option value="assignment" <%= task.category == 'assignment' ? 'selected' : '' %>>assignment</option>
+                        <option value="project" <%= task.category == 'project' ? 'selected' : '' %>>project</option>
+                        <option value="meeting" <%= task.category == 'meeting' ? 'selected' : '' %>>meeting</option>
+                        <option value="reading" <%= task.category == 'reading' ? 'selected' : '' %>>reading</option>
+                        <option value="other" <%= task.category == 'other' ? 'selected' : '' %>>other</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label for="occurs">Occurs</label>
+                    <input type="text" class="form-control" id="occurs" name="occurs" value="<%= task.occurs %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="days">Days</label>
+                    <select class="form-control" name="days" id="days" multiple style="height: 170px;">
+                        <option value="monday" <%= task.days.includes('monday') ? 'selected' : '' %>>Monday</option>
+                        <option value="tuesday" <%= task.days.includes('tuesday') ? 'selected' : '' %>>Tuesday</option>
+                        <option value="wednesday" <%= task.days.includes('wednesday') ? 'selected' : '' %>>Wednesday</option>
+                        <option value="thursday" <%= task.days.includes('thursday') ? 'selected' : '' %>>Thursday</option>
+                        <option value="friday" <%= task.days.includes('friday') ? 'selected' : '' %>>Friday</option>
+                        <option value="saturday" <%= task.days.includes('saturday') ? 'selected' : '' %>>Saturday</option>
+                        <option value="sunday" <%= task.days.includes('sunday') ? 'selected' : '' %>>Sunday</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dueDate">Due Date</label>
+                    <input type="text" class="form-control" id="dueDate" name="dueDate" value="<%= moment(task.dueDate).format('DD/MM/YYYY') %>">
+                </div>
+                
+                <div class="form-group">
+                    <label for="createdAt">Created At</label>
+                    <input type="text" disabled class="form-control" id="createdAt" name="createdAt" value="<%= task.createdAt %>">
+                </div>
+
+            </div>
+        </div>
+
+            <button type="submit" class="btn btn-success">Update</button>
+
+        </form>
+
+
+    </div>
+</div>
+
+
+<%- include('../partials/footer'); %>

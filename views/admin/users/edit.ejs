@@ -1,0 +1,179 @@
+<% title = "Users" %>
+<%- include('../partials/head'); %>
+<%- include('../partials/nav'); %>
+
+<div class="container-fluid">
+    <div>
+        
+        <div>
+            <div class="menu">
+                <ul class="user-menu">
+                    <li class="nav-item"><a class="nav-link active" href="/users/<%= user.id %>"><span>User Edit</span></a></li>
+                    <li class="nav-item <%- title === 'Classes' ? 'active' : '' %>"><a class="nav-link" href="/classes/user/<%= user.id %>"><span>Classes</span></a></li>
+                    <li class="nav-item <%- title === 'Exams' ? 'active' : '' %>"><a class="nav-link" href="/exams/user/<%= user.id %>"><span>Exams</span></a></li>
+                    <li class="nav-item <%- title === 'Tasks' ? 'active' : '' %>"><a class="nav-link" href="/tasks/user/<%= user.id %>"><span>Tasks</span></a></li>
+                    <li class="nav-item <%- title === 'Subjects' ? 'active' : '' %>"><a class="nav-link" href="/subjects/user/<%= user.id %>"><span>Subjects</span></a></li>
+                    <li class="nav-item <%- title === 'Holidays' ? 'active' : '' %>"><a class="nav-link" href="/holidays/user/<%= user.id %>"><span>Holidays</span></a></li>
+                    <li class="nav-item" style="float: right;"><a class="nav-link" href="/users"><span>< Back</span></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <% if(queryParams.message) { %>
+            <div class="alert alert-success" role="alert" style="margin-top: 10px;">
+                <%= queryParams.message %>
+            </div>
+        <% } %>
+        <% if(queryParams.messageDanger) { %>
+            <div class="alert alert-danger" role="alert" style="margin-top: 10px;">
+                <%= queryParams.messageDanger %>
+            </div>
+        <% } %>
+
+        <!-- edit user form -->
+        <form action="/users/<%= user.id %>" class="row" method="POST" style="margin-top: 20px;" enctype="multipart/form-data">
+            
+            <div class="col-6">
+
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" value="<%= user.firstName %>" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="<%= user.lastName %>" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="profileImage">Profile Image</label>
+                    <input type="file" class="form-control" id="profileImage" name="profileImage" value="">
+                    <div>
+                        <img src="<%= user.profileImageUrl %>" alt="" style="width: 280px; margin-top: 10px;">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-6">
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" autocomplete="off">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="********" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select class="form-control" id="role" name="role">
+                        <option value="student" <% if(user.role == "student") { %> selected <% } %>>Student</option>
+                        <option value="teacher" <% if(user.role == "teacher") { %> selected <% } %>>Teacher</option>
+                        <option value="admin" <% if(user.role == "admin") { %> selected <% } %>>Admin</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="isVerified">Is Verified</label>
+                    <select class="form-control" id="isVerified" name="isVerified">
+                        <option value="true" <% if(user.isVerified === true) { %> selected <% } %>>Yes</option>
+                        <option value="false" <% if(user.isVerified === false) { %> selected <% } %>>No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" id="status" name="status" disabled>
+                        <option value="active" <% if(user.status === 'active') { %> selected <% } %>>Active</option>
+                        <option value="inactive" <% if(user.status === 'inactive') { %> selected <% } %>>Inactive</option>
+                        <option value="deleted" <% if(user.status === 'deleted') { %> selected <% } %>>Deleted</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success" style="float: right;">Update</button>
+
+            </div>
+
+        </form>
+
+        <h5>Account Info</h5>
+        <hr>
+        <div class="row">
+            
+            <div class="col-md-4">
+                <b>Account created at: </b>
+                <div class=""><%= moment(user.createdAt).format('D. MMMM YYYY HH:ss:mm') %></div>
+            </div>
+
+            <div class="col-md-4">
+                <b>Last active at: </b>
+                <% if(user.lastActiveAt) { %>
+                    <div class=""><%= moment(user.lastActiveAt).format('D. MMMM YYYY HH:ss:mm') %></div>
+                <% } %>
+            </div>
+
+            <div class="col-md-4">
+                <b>Account deleted at: </b>
+                <% if(user.deletedAt) { %>
+                    <div class=""><%= moment(user.deletedAt).format('D. MMMM YYYY HH:ss:mm') %></div>
+                <% } %>
+            </div>
+
+        </div>
+        <br><br>
+
+        <div>
+            <h5>Send email notifications to user</h5>
+            <hr>
+
+            <form id="forgotPasswordForm" action="/api/auth/forgot-password?isAdmin=true" method="POST">
+                <input type="hidden" name="email" value="<%= user.email %>">
+                <button type="button" class="btn btn-warning" onclick="confirmResetPassword('<%= user.email %>')">Reset Password Email</button>
+            </form>
+    
+            <br>
+
+            <form id="resendVerificationForm" action="/api/auth/resend-verification-code?isAdmin=true" method="POST">
+                <input type="hidden" name="email" value="<%= user.email %>">
+                <button type="button" class="btn btn-warning" onclick="confirmResendVerification('<%= user.email %>')">Account Verification Email</button>
+            </form>
+
+        </div>
+        <br><br>
+
+        <div>
+            <h5>Delete Account</h5>
+            <hr>
+            <form id="deleteForm" action="/users/<%= user.id %>/delete" method="POST">
+                <input type="hidden" name="id" value="<%= user.id %>">
+                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete Account</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function confirmResetPassword(email) {
+      if (confirm('Are you sure you want to send reset password email to '+email+'?')) {
+        document.getElementById('forgotPasswordForm').submit();
+      }
+    }
+
+    function confirmResendVerification(email) {
+      if (confirm('Are you sure you want to send account verification email to '+email+'?')) {
+        document.getElementById('resendVerificationForm').submit();
+      }
+    }
+
+    function confirmDelete() {
+      if (confirm('Are you sure you want to DELETE this account?')) {
+        document.getElementById('deleteForm').submit();
+      }
+    }
+</script>
+
+<%- include('../partials/footer'); %>
